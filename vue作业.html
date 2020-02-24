@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<button v-bind:disabled="buer">{{indexs}}</button>
+		</div>
+	</body>
+	<script type="text/javascript">
+		const vue = new Vue({
+			el:'#app',
+			data:{
+				indexs: '10',
+				buer: true
+			},
+			mounted: function(){
+				let time = null;
+				time = setInterval(()=>{
+					this.indexs--;
+					if(this.indexs == -1){
+						this.indexs = '确定';
+						this.buer = false;
+						clearInterval(time)
+					}
+				},1000)
+			}
+		})
+	</script>
+</html>
