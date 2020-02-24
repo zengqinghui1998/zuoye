@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<div>数值1：{{num1}}</div>
+			<div>数值2：{{num2}}</div>
+			<div>平均值为：{{pingjun}}</div>
+			<div>总和值为：{{zonghe}}</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		 const vm = new Vue({
+			 el:'#app',
+			 data: {
+				 num1: 80,
+				 num2: 50,
+			 },
+			 computed:{
+				 pingjun:function(){
+					 return (this.num1 + this.num2) / 2;
+				 },
+				 zonghe:function(){
+					 return this.num1 + this.num2
+				 }
+			 }
+		 })
+	</script>
+</html>

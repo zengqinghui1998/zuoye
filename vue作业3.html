@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+		<style type="text/css">
+			.red{
+				background: red;
+			}
+			.green{
+				background: green;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<div :class="yanse">测试</div>
+			<button @click="dianji">点击更换div的底色</button>
+		</div>
+	</body>
+	<script type="text/javascript">
+		const vm = new Vue({
+			el:"#app",
+			data:{
+				yanse:'red',
+				type: true
+			},
+			methods:{
+				dianji: function(){
+					if(this.type){
+						this.yanse = 'green';
+						this.type = false;
+					}else{
+						this.yanse = 'red';
+						this.type = true;
+					}
+				}
+			}
+		})
+	</script>
+</html>

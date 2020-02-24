@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<span>{{str}}</span><br/>
+			<button @click="dianji">{{daxiaoxie}}</button>
+		</div>
+	</body>
+	<script type="text/javascript">
+		const vm = new Vue({
+			el: '#app',
+			data: {
+				str: 'hello',
+				daxiaoxie: '点击使字符串转大写',
+				type: true
+			},
+			methods:{
+				dianji:function(){
+					if(this.type){
+						this.str = this.str.toUpperCase();
+						this.daxiaoxie = '点击使字符串转小写';
+						this.type = false
+					}else{
+						this.str = this.str.toLowerCase();
+						this.daxiaoxie = '点击使字符串转大写';
+						this.type = true
+					}
+				}
+			}
+		})
+	</script>
+</html>
