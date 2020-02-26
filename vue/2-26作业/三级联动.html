@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="js/axios.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="app">
+			<select @click="fun($event)">
+				<option value ="">请选择省份</option>
+				<option  v-for="item in shengfen" :key="item.id" v-bind:value ="item.id" >{{item.name}}</option>
+			</select>
+			<select @click="fun1($event)">
+				<option value ="">请选择地级市</option>
+				<option  v-for="item in dijishis" :key="item.id" v-bind:value ="item.id" >{{item.name}}</option>
+			</select>
+			<select>
+				<option value ="">请选择 市或区</option>
+				<option  v-for="item in shiqus" :key="item.id" v-bind:value ="item.id" >{{item.name}}</option>
+			</select>
+		</div>
+	</body>
+	<script type="text/javascript">
+		const vm = new Vue({
+			el:'#app',
+			data:{
+				shengfen:[],
+				dijishi:[],
+				shiqu:[],
+				dijishis:[],
+				shiqus:[]
+			},
+			mounted:function(){
+				axios.get('json/province.json').then((data)=>{
+					this.shengfen = data.data;
+				}).catch((error)=>{
+					console.log(error)
+				}),
+				axios.get('json/city.json').then((data)=>{
+					this.dijishi = data.data;
+					// console.log(this.dijishi)
+				}).catch((error)=>{
+					console.log(error)
+				}),
+				axios.get('json/area.json').then((data)=>{
+					this.shiqu = data.data;
+					// console.log(this.shiqu)
+				}).catch((error)=>{
+					console.log(error)
+				})
+			},
+			methods:{
+				fun:function(ev){
+					this.dijishis = [];
+					for(id in this.dijishi){
+						if(id == ev.target.value){
+							for(key in this.dijishi[id]){
+								// console.log(this.dijishi[id][key])
+								this.dijishis.push(this.dijishi[id][key])
+							}
+						}
+					}
+				},
+				fun1:function(ev){
+					this.shiqus = [];
+					for(id in this.shiqu){
+						// console.log(this.shiqu[id])
+						if(id == ev.target.value){
+							for(key in this.shiqu[id]){
+								this.shiqus.push(this.shiqu[id][key])
+							}
+						}
+					}
+					// console.log(ev.target.value)
+				}
+			}
+		})
+	</script>
+</html>

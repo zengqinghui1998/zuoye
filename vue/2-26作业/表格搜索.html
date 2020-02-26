@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<table border="1">
+				<tr>学生信息表</tr>
+				<tr>
+					<th>学号</th>
+					<th>姓名</th>
+					<th>年龄</th>
+					<th>籍贯</th>
+					<th>联系电话</th>
+				</tr>
+				<tr v-for='(item,index) in list' :key='item.id'>
+					<td>{{item.id}}</td>
+					<td>{{item.name}}</td>
+					<td>{{item.age}}</td>
+					<td>{{item.guanzhi}}</td>
+					<td>{{item.lianxi}}</td>
+				</tr>
+			</table>
+			<input type="text" v-model="names" value="" placeholder="请输入学生姓名"/>
+			<button @click="sousuo">搜索</button><br/>
+			<span v-show="type">学号：{{lists.id}}  姓名：{{lists.name}}  年龄：{{lists.age}}  籍贯：{{lists.guanzhi}}  联系电话：{{lists.lianxi}}</span>
+		</div>
+	</body>
+	<script type="text/javascript">
+		// 学生表格实现搜索某位同学的功能，最好还能搜索拼音
+		const vm = new Vue({
+			el:'#app',
+			data:{
+				names:'',
+				lists:{},
+				type: false,
+				list:[
+					{id:0,name:'张三',age:20,guanzhi:'广东',lianxi:123456789},
+					{id:1,name:'李四',age:22,guanzhi:'北京',lianxi:132456789},
+					{id:2,name:'牛头',age:19,guanzhi:'上海',lianxi:143256789},
+					{id:3,name:'马面',age:17,guanzhi:'广西',lianxi:165432789},
+					{id:4,name:'小柒',age:19,guanzhi:'海南',lianxi:176543289}
+				]
+			},
+			methods:{
+				sousuo:function(){
+					this.list.filter((item)=>{
+						if(this.names == item.name){
+							this.lists = item;
+							this.type = true;
+							console.log(this.lists)	
+						}
+					})
+				}
+			}
+		})
+	</script>
+</html>

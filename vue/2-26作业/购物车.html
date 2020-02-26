@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			table{
+				text-align: center;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<table border="1">
+				<tr>
+					<th>商品名称</th>
+					<th>商品价格</th>
+					<th>商品数量</th>
+					<th>操作</th>
+				</tr>
+				<tr v-for="(item,index) in shangpin" :key="index">
+					<td>{{item.name}}</td>
+					<td>{{item.price}}</td>
+					<td><button @click="jians(item.id)" v-bind:disabled="buers">-</button> {{item.num}} <button @click="jias(item.id)">+</button></td>
+					<td><button @click="fun(item.id)">{{item.caozuo}}</button></td>
+				</tr>
+			</table>
+			<h2>购物车</h2>
+			<table border="1">
+				<tr>
+					<th>商品名称</th>
+					<th>商品价格</th>
+					<th>商品数量</th>
+					<th>操作</th>
+				</tr>
+				<tr v-for="(item,index) in gouwuche" :key="index">
+					<td>{{item.name}}</td>
+					<td>{{item.price}}</td>
+					<td><button @click="jian(item.id)" v-bind:disabled="buer">-</button> {{item.num}} <button @click="jia(item.id)">+</button></td>
+					<td><button @click="fun1(item.id)">{{item.caozuo}}</button></td>
+				</tr>
+				<tr>
+					<td>总价</td>
+					<td>{{zongji}}</td>
+				</tr>
+			</table>
+		</div>
+	</body>
+	<script type="text/javascript">
+		const vm = new Vue({
+			el:'#app',
+			data:{
+				shangpin:[
+					{id:0,name:'苹果',price:10000,num:0,caozuo:'加入购物车'},
+					{id:1,name:'华为',price:8000,num:0,caozuo:'加入购物车'},
+					{id:2,name:'小米',price:4000,num:0,caozuo:'加入购物车'},
+					{id:3,name:'三星',price:9000,num:0,caozuo:'加入购物车'},
+				],
+				gouwuche:[
+					
+				],
+				arr:[],
+				buer: false,
+				buers: false
+			},
+			methods:{
+				jian:function(index){
+					if(this.gouwuche[this.arr.indexOf(index)].num == 0){
+						this.buer = true;
+					}else{
+						this.buer = false;
+						this.gouwuche[this.arr.indexOf(index)].num--;
+					}
+				},
+				jia:function(index){
+					this.buer = false;
+					this.gouwuche[this.arr.indexOf(index)].num++;
+				},
+				jians:function(index){
+					if(this.shangpin[index].num == 0){
+						this.buers = true;
+					}else{
+						this.shangpin[index].num--;
+					}
+				},
+				jias:function(index){
+					this.buers = false;
+					this.shangpin[index].num++;
+				},
+				fun:function(index){
+					//判断购物车里有没有存在准备过来的对象
+					//如果购物车里为空，先添加进来，不论条件
+					if(this.gouwuche.length == 0){
+						//把对象复制过来，修改操作值，再添加到购物车
+						var objs = JSON.stringify(this.shangpin[index]);
+						var obj = JSON.parse(objs)
+						obj.caozuo = '移出购物车';
+						obj.index = index;
+						this.gouwuche.push(obj);
+						this.arr.push(obj.index);
+						this.shangpin[index].num = 0;
+					}else{
+							if(this.arr.indexOf(index) !== -1){
+								if(this.shangpin[index].num == 0){
+									this.gouwuche[this.arr.indexOf(index)].num++;
+								}else{
+									this.gouwuche[this.arr.indexOf(index)].num += this.shangpin[index].num;
+									this.shangpin[index].num = 0;
+								}
+								
+							}else{
+								var objs = JSON.stringify(this.shangpin[index]);
+								var obj = JSON.parse(objs)
+								obj.caozuo = '移出购物车';
+								obj.index = index;
+								this.gouwuche.push(obj)
+								this.arr.push(obj.index)
+							}
+							// this.arr.push(this.gouwuche[i].name)
+							// console.log(this.arr)
+					}
+				},
+				fun1:function(index){
+					this.$set(this.gouwuche.splice(this.arr.indexOf(index),1));
+					this.$set(this.arr.splice(this.arr.indexOf(index),1))
+					// console.log(index)
+				}
+					
+			},
+			computed:{
+				zongji:function(){
+					var zong = 0;
+					for(var i = 0;i < this.gouwuche.length;i++){
+						zong += this.gouwuche[i].num * this.gouwuche[i].price
+					}
+					return zong;
+				},
+			}
+		})
+	</script>
+</html>
