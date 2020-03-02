@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Swiper demo</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+		<link rel="stylesheet" type="text/css" href="css/swiper.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/index.css"/>
+		<script src="js/swiper.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/axios.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="app">
+			<lunbos :lunbo='lunbo'></lunbos>
+			<div class="fenlei">
+				<ul class="fenlei1">
+					<li><img src="img/热茶.png"></li>
+					<li><img src="img/钻石.png"></li>
+					<li><img src="img/钥匙.png"></li>
+					<li><img src="img/vip.png"></li>
+				</ul>
+				<ul class="fenlei2">
+					<li>省心</li>
+					<li>品质</li>
+					<li>私密</li>
+					<li>专享</li>
+				</ul>
+			</div>
+			<div class="tuijian">
+				<span>
+					<span style="font-size: 18px;color: #A9A9A9;">推荐</span>
+					<span><img src="img/下%20%20拉.png"></span>
+				</span>
+			</div>
+			<neirongtitles :neirong='neirongtitle'></neirongtitles>
+			<zhaomulunbos :zhaomulunbo='zhaomulunbo'>
+				<ul>
+					<li>
+						招募活动
+						<p>旅途中，邂逅TA，邂逅世界的美</p>
+					</li>
+					<li>{{num}} / 10</li>
+				</ul>
+			</zhaomulunbos>
+			<div class="jianjie">
+				<ul>
+					<li><img src="img/下%20%20拉.png" >不用懂外语</li>
+					<li><img src="img/下%20%20拉.png" >不用懂攻略</li>
+					<li><img src="img/下%20%20拉.png" >没有购物坑</li>
+					<li><img src="img/下%20%20拉.png" >不用折腾自己</li>
+				</ul>
+			</div>
+			<div class="tuijian">
+				<span>
+					<span style="font-size: 18px;color: #A9A9A9;">猜你喜欢</span>
+					<span><img src="img/下%20%20拉.png"></span>
+				</span>
+			</div>
+			<div class="xihuan">
+				<xihuans :xihuan='xihuan'></xihuans>
+			</div>
+			<div class="daohang">
+				<ul class="daohang1">
+					<li><img src="img/首页.png"  style="margin-left: -3px;"><br/>首页</li>
+					<li><img src="img/发现.png" ><br/>发现</li>
+					<li><img src="img/加号.png" ><br/>定制行</li>
+					<li><img src="img/目的地%20(1).png" ><br/>目的地</li>
+					<li><img src="img/我.png" ><br/>我</li>
+				</ul>
+				<!-- <ul class="daohang2">
+					<li>首页</li>
+					<li>发现</li>
+					<li>定制行</li>
+					<li>目的地</li>
+					<li>我</li>
+				</ul> -->
+			</div>
+			<div class="cheng">
+				
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		const lunbos = {
+			props: ['lunbo'],
+			template: `
+				<div class="swiper-container">
+					<div class="swiper-wrapper">
+						<div class="swiper-slide" v-for="(item,index) in lunbo" :lun='item' :key='index'>
+							<img :src='item.photoUrl'>
+						</div>
+					</div>
+					<div class="swiper-pagination"></div>
+				</div>
+			`
+		}
+		const neirongtitles = {
+			props: ['neirong'],
+			template: `
+				<div>
+					<div class="neirong" v-for='(item,index) in neirong' :key='index'>
+						<img :src="item.proPicUrl" >
+						<div class="neirongs">
+							<div class="neirongs1">{{item.proTitle}}</div>
+							<div class="neirongs2"><span><img src="img/地点.png" ></span>{{item.country}}</div>
+							<div class="neirongs3">
+								<span><span><img src="img/时间.png" ></span>{{item.routingDat}}天{{item.routingNigth}}晚</span>
+								<span><span><img src="img/金钱%20(1).png" ></span>{{item.amount}}元起</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			`
+		}
+		const myzhaomu = {
+			props:['i'],
+			template:`
+				<div class="swiper-slide" style="margin-top:-42px;">
+					<div class="numbox ani" swiper-animate-effect="fadeInUp" swiper-animate-duration="0.5s" swiper-animate-delay="0.3s">
+						<img :src='i.pro_pic_url'/>
+						<div class="zhaomulunbo1">
+							<span>{{i.pro_title}}</span>
+							<span style="text-shadow: 0px 0px 10px slategray;"><span><img src="img/地点.png" style="width: 12px;height: 13px;"></span>{{i.country}}</span>
+						</div>
+						<div class="zhaomulunbo2">
+							<span><span><img src="img/时间.png" style="width: 12px;height: 13px;"></span>{{i.routing_nigth}}天{{i.product_type}}晚</span>
+							<span><span><img src="img/金钱%20(1).png" style="width: 12px;height: 13px;"></span>{{i.amount}}元</span>
+						</div>
+					</div>
+				</div>
+			`,
+		}
+		const zhaomulunbos = {
+			props: ['zhaomulunbo'],
+			template: `
+				<div>
+					<div class="zhaomu">
+						<div class="zhaomutitle">
+							<slot></slot>
+						</div>
+						<div class="zhaomulunbo">
+							<div class="swiper-container" style='height:300px;'>
+								<div class="swiper-wrapper">
+									<myzhaomu v-for="(item,index) in zhaomulunbo" :i='item'></myzhaomu>
+								</div>
+							</div>
+						</div>
+						<hr style="border: 0.5px solid black;margin-top: 83px;">
+					</div>
+				</div>
+				`,
+				components:{
+					myzhaomu
+				}
+		}
+		const xihuans = {
+			props:['xihuan'],
+			template:`
+				<div class='xihuans'>
+					<div class="xihuan1" v-for='(item,index) in xihuan' :key='index'>
+						<img :src="item.proPicUrl" >
+						<p class="xihuans2">{\{item.proTitle}}</p>
+						<p class="xihuans3"><img src="img/地点.png" style="width: 12px;height: 13px;">{{item.country}}</p>
+						<div class="xihuans4">
+							<div><span><img src="img/时间.png" style="width: 12px;height: 13px;"></span>{{item.routingDat}}天{{item.routingNigth}}晚</div>
+							<div><span><img src="img/金钱%20(1).png" style="width: 12px;height: 13px;"></span>{{item.amount}}元起</div>
+						</div>
+					</div>
+				</div>
+			`
+		}
+		const vm = new Vue({
+			el: '#app',
+			data: {
+				num:1,
+				lunbo: {},
+				neirongtitle: {},
+				zhaomulunbo: {},
+				xihuan:{}
+			},
+			mounted: function() {
+				new Swiper('.swiper-container', {
+					spaceBetween: 30,
+					observer: true,
+					centeredSlides: true,
+					autoplay: {
+						delay: 2500,
+						disableOnInteraction: false,
+					},
+					pagination: {
+						el: '.swiper-pagination',
+						clickable: true,
+					},
+					navigation: {
+						nextEl: '.swiper-button-next',
+						prevEl: '.swiper-button-prev',
+					},
+				}),
+				axios.get('json/lunbo.json').then((data) => {
+					this.lunbo = data.data;
+				}).catch((error) => {
+					console.log(error)
+				}),
+				axios.get('json/neirong.json').then((data) => {
+					this.neirongtitle = data.data;
+				}).catch((error) => {
+					console.log(error)
+				}),
+				axios.get('json/zhaomuhuodong.json').then((data) => {
+					this.zhaomulunbo = data.data.matchedProducts;
+				}).catch((error) => {
+					console.log(error)
+				}),
+				axios.get('json/xihuan.json').then((data) => {
+					this.xihuan = data.data;
+					console.log(this.xihuan)
+				}).catch((error) => {
+					console.log(error)
+				})
+			},
+			components: {
+				lunbos,
+				neirongtitles,
+				zhaomulunbos,
+				xihuans
+			}
+		})
+	</script>
+</html>

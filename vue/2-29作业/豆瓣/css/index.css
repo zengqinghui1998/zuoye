@@ -1,0 +1,60 @@
+body{
+				width: 375px;
+			}
+			*{
+				padding: 0;
+				margin: 0;
+			}
+			ul li{
+				list-style: none;
+			}
+			.guochantop{
+				height: 25px;
+				display: flex;
+				justify-content: space-around;
+			}
+			.guochantop1{
+				font-size: 20px;
+				font-weight: bold;
+			}
+			.guochantop2{
+				color: green;
+				line-height: 30px;
+			}
+			.guochanbodys{
+				width: 375px;
+				overflow-x: auto;
+			}
+			.guochanbodys::-webkit-scrollbar{
+				display: none;
+			}
+			.guochanbody{
+				display: flex;
+				flex-wrap: nowrap;
+				flex-direction: row;
+			}
+			.guochanbody li{
+				width: 100px;
+				margin: 10px;
+			}
+			.guochanbody img{
+				width: 100px;
+				height: 142px;
+			}
+			.guochanbodytitle{
+				width: 100px;
+				font-size: 14px;
+				text-align: center;
+				overflow: hidden;
+				white-space:nowrap;
+				text-overflow: ellipsis;
+			}
+			.colors{
+				font-size: 12px;
+				color: darkgray;
+				text-align: center;
+			}
+			.spans span{
+				margin: 0;
+				padding: 0;
+			}

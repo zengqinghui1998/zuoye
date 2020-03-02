@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<script src="js/axios.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
+	</head>
+	<body>
+		<div id="app">
+			<titles :gouchanlist="guochanList">
+				<div class="guochantop">
+					<span class="guochantop1">近期值得看的国产剧</span>
+					<span class="guochantop2">更多</span>
+				</div>
+			</titles>
+			<titles :gouchanlist="zongyiList">
+				<div class="guochantop">
+					<span class="guochantop1">近期值得看的综艺节目</span>
+					<span class="guochantop2">更多</span>
+				</div>
+			</titles>
+			<titles :gouchanlist="yingmeiList">
+				<div class="guochantop">
+					<span class="guochantop1">近期值得看的英美剧</span>
+					<span class="guochantop2">更多</span>
+				</div>
+			</titles>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var titles = {
+			props: ['gouchanlist'],
+			template: `<div>
+					<slot></slot>
+				 <div class="guochanbodys">
+				 	<ul class="guochanbody">
+				 		<li v-for="item in gouchanlist">
+				 			<div>
+				 				<img :src="item.cover.url" title="item.title" />
+				 				<p class="guochanbodytitle">{{item.title}}</p>
+				 				<p  class="colors">
+				 					<span v-if="item.rating" class="spans">
+										<span v-if="item.rating.value > 9">
+											<span v-for="n in 5">
+												<img src="img/ZS星星.png" style="width: 10px;height: 10px;"/>
+											</span>
+										</span>
+										<span v-else-if="item.rating.value > 7">
+											<span v-for="n in 4">
+												<img src="img/ZS星星.png" style="width: 10px;height: 10px;"/>
+											</span>
+											<img src="img/ZS星星%20(1).png" style="width: 10px;height: 10px;"/>
+										</span>
+										<span v-else-if="item.rating.value > 5">
+											<span v-for="n in 3">
+												<img src="img/ZS星星.png" style="width: 10px;height: 10px;"/>
+											</span>
+											<span v-for="n in 2">
+												<img src="img/ZS星星%20(1).png" style="width: 10px;height: 10px;"/>
+											</span>
+										</span>
+										<span v-else="item.rating.value > 3">
+											<span v-for="n in 2">
+												<img src="img/ZS星星.png" style="width: 10px;height: 10px;"/>
+											</span>
+											<span v-for="n in 3">
+												<img src="img/ZS星星%20(1).png" style="width: 10px;height: 10px;"/>
+											</span>
+										</span>
+				 						{{item.rating.value}}
+				 					</span>
+				 					<span v-else>{{item.null_rating_reason}}</span>
+				 				</p>
+				 			</div>
+				 		</li>
+				 	</ul>
+				 </div>
+			</div>`
+		}
+		const vm = new Vue({
+			el: '#app',
+			data: {
+				guochanList: [],
+				zongyiList: [],
+				yingmeiList: [],
+			},
+			mounted: function() {
+				//国产
+				axios.get('json/dianshiju.json').then((data) => {
+						console.log(data)
+						this.guochanList = data.data.subject_collection_items;
+					}).catch((error) => {
+						console.log(error)
+					}),
+					axios.get('json/zongyi.json').then((data) => {
+						this.zongyiList = data.data.subject_collection_items;
+					}).catch((error) => {
+						console.log(error)
+					}),
+					axios.get('json/yingmei.json').then((data) => {
+						this.yingmeiList = data.data.subject_collection_items;
+					}).catch((error) => {
+						console.log(error)
+					})
+			},
+			components: {
+				titles,
+			}
+		})
+	</script>
+</html>
