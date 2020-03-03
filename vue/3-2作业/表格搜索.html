@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+		<style type="text/css">
+			.ziti{
+				font-size: 20px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<input type="text" v-model="names" placeholder="请输入学生姓名"/><br/>
+			<div id="con" v-searchword="{names:names,list:list}">
+				<table border="1">
+					<tr>学生信息表</tr>
+					<tr>
+						<th>学号</th>
+						<th>姓名</th>
+						<th>年龄</th>
+						<th>籍贯</th>
+						<th>联系电话</th>
+					</tr>
+					<tr v-for='(item,index) in list' :key='item.id' >
+						<td>{{item.id}}</td>
+						<td>{{item.name}}</td>
+						<td>{{item.age}}</td>
+						<td>{{item.guanzhi}}</td>
+						<td>{{item.lianxi}}</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		Vue.directive('searchword',{
+			componentUpdated(el,binding){
+				var num = 4;
+				var lists = binding.value.list;
+				var names = binding.value.names;
+				console.log(el.childNodes[1].childNodes[0].childNodes)
+				var namess ='';
+				if(names < 1){
+					alert('请输入')
+					document.getElementsByTagName('input')[0].value= '';
+					for(var i = 0;i < el.childNodes[1].childNodes[0].childNodes.length;i++){
+						el.childNodes[1].childNodes[0].childNodes[i].style = '';
+					}
+					return;
+				}
+				binding.value.size = true
+				var arr= [];
+				lists.filter((value)=>{
+					arr.push(value.name.match(names))
+				})
+				var type = true;
+				for(var i = 0;i < arr.length;i++){
+					if(arr[i] !== null){
+						num += i;
+						type = false;
+					}
+				}
+				if(type){
+					alert('对不起，没找到你想要的')
+					document.getElementsByTagName('input')[0].value= '';
+					return;
+				}else{
+					namess = names
+					el.childNodes[1].childNodes[0].childNodes[num].style.fontWeight = "bolder";
+					el.childNodes[1].childNodes[0].childNodes[num].style.color = "blue";
+				}
+			}
+		})
+		const vm = new Vue({
+			el:'#app',
+			data:{
+				size:false,
+				names:'',
+				lists:{},
+				type: false,
+				list:[
+					{id:0,name:'张三',age:20,guanzhi:'广东',lianxi:123456789},
+					{id:1,name:'李四',age:22,guanzhi:'北京',lianxi:132456789},
+					{id:2,name:'牛头',age:19,guanzhi:'上海',lianxi:143256789},
+					{id:3,name:'马面',age:17,guanzhi:'广西',lianxi:165432789},
+					{id:4,name:'小柒',age:19,guanzhi:'海南',lianxi:176543289}
+				]
+			}
+		})
+	</script>
+</html>
