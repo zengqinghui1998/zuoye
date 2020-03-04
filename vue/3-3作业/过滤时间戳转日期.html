@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="app">
+			{{timearr}}
+			<div v-for='item in timearr'>
+				{{item | fun('arg1')}}
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		// 1.将时间戳转日期时间   timearr:['1579657789851','1563516693000','1578539380000'],**年**月**日
+		const vm = new Vue({
+			el:'#app',
+			data:{
+				timearr:['1579657789851','1563516693000','1578539380000']
+			},
+			filters:{
+				fun:function(value,arg){
+					var a = +value;
+					var b = new Date(a);
+					var nian = b.getFullYear();
+					var yue = b.getMonth()+1;
+					var ri = b.getDate();
+					return nian + '年' + yue + '月' + ri + '日'
+				}
+			}
+		})
+	</script>
+</html>

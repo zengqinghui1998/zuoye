@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="app">
+			{{arr | fun('arg1')}}
+		</div>
+	</body>
+	<script type="text/javascript">
+		const vm = new Vue({
+			el:'#app',
+			data:{
+				arr:[126,151,2,62,6,25,62,61462,2,4,321]
+			},
+			filters:{
+				fun:function(value,arg){
+					return value.sort(function(a,b){
+						return a - b
+					})
+				}
+			}
+		})
+	</script>
+</html>

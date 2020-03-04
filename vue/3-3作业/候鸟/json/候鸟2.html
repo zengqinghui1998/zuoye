@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/axios.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/vue-router.js" type="text/javascript" charset="utf-8"></script>
+		<title></title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		/***********推荐内容区****************/
+		//更改为路由组件
+		const neirongtitles = {
+			data:function(){
+				return {
+					neirong:[]
+				}
+			},
+			template:`
+				<div>
+					<div class="neirong" v-for='(item,index) in neirong' :key='index'>
+						<router-link :to="'/myneirong/'+item.productId" href="index2.html">
+							<img :src="item.proPicUrl" >
+							<div class="neirongs">
+								<div class="neirongs1">{{item.proTitle}}</div>
+								<div class="neirongs2"><span><img src="img/地点.png" ></span>{{item.country}}</div>
+								<div class="neirongs3">
+									<span><span><img src="img/时间.png" ></span>{{item.routingDat}}天{{item.routingNigth}}晚</span>
+									<span><span><img src="img/金钱%20(1).png" ></span>{{item.amount}}元起</span>
+								</div>
+							</div>
+						</router-link>
+					</div>
+				</div>
+			`,
+			//挂载后引入数据
+			mounted:function(){
+				axios.post("http://www.51houniao.com/product/product/getProductRecommendUser",{
+					desc: false,
+					orderBy: "top",
+					pageNow: 1,
+					pageSize: 20,
+					seller_user_id: "4bc4027c645343f09a964b5c2e9f875b"
+				}).then((res)=>{
+					// console.log(res);
+					this.neirong = res.data;
+					console.log(this.neirong)
+				})
+			}
+		}
+		//点击内容区的列表进入详细组件
+		var myneirong = {
+			data:function(){
+				return {
+					item:{}
+				}
+			},
+			template:`<div>内容页
+			产品id：{{$route.params}}
+			产品标题：<span v-if="item.product_base_info !== undefined">{{item.product_base_info.pro_title}}</span>
+			<div v-if="item.product_base_info !== undefined">
+				<img :src="item.product_base_info.pro_pic_url" />
+			</div>
+			</div>`,
+			watch:{
+				'$route'(to,from){}
+			},
+			mounted:function(){
+				//获取内容页数据
+				axios.get("http://www.51houniao.com/product/product/getProductDetails/"+this.$route.params.idvalue
+					).then((res)=>{
+					console.log(res);
+					this.item = res.data;
+				})
+			}
+		}
+		//配置路由表
+		var routes = [
+			{'path':'/myneirong/:id','component':myneirong}
+		]
+		//创建路由对象
+		var router = new VueRouter({
+			routes:routes
+		})
+		const vm = new Vue({
+			el:'#app',
+			data:{},
+			router:router
+		})
+	</script>
+</html>

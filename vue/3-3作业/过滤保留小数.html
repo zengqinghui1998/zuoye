@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="app">
+			<input type="text" placeholder="请输入含有小数点的数值" v-model="num"/><br />
+			转化后的值：{{num | fun('arg1')}}
+		</div>
+	</body>
+	<script type="text/javascript">
+		const vm = new Vue({
+			el:'#app',
+			data:{
+				num : ''
+			},
+			filters:{
+				fun:function(value,arg){
+					var a = +value;
+					return a.toFixed(2);
+				}
+			}
+		})
+	</script>
+</html>

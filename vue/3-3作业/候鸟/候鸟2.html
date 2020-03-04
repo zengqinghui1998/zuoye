@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/vue-router.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/axios.min.js" type="text/javascript" charset="utf-8"></script>
+		<title></title>
+		<style type="text/css">
+			body{
+				padding: 0;
+				margin: 0;
+			}
+			a{
+				text-decoration:none;
+			}
+			ul,li{
+				list-style: none;
+			}
+			.huanying{
+				width: 100%;
+				display: flex;
+				justify-content: center;
+				margin-top: 50%;
+				font-size: 50px;
+				color: #007AFF;
+			}
+			.neirong a{
+				border-top: 1px dotted #A9A9A9;
+				width: 100%;
+				height: 101px;
+				background: white;
+				display: flex;
+				flex-wrap: nowrap;
+			}
+			
+			
+			.neirong img {
+				width: 146px;
+				height: 77.58px;
+				margin: 12px;
+			}
+			
+			.neirongs {
+				width: 219px;
+				height: 77.58px;
+				margin-top: 12px;
+				margin-right: 3px;
+				font-size: 12px;
+				display: flex;
+				flex-flow: column;
+				justify-content: space-between;
+			}
+			
+			.neirongs img {
+				width: 12px;
+				height: 13px;
+				margin: 0;
+				padding: 0;
+			}
+			.neirongs1{
+				color: #000000;
+			}
+			.neirongs2 {
+				color: slategrey;
+				text-shadow: 0px 0px 10px slategray;
+			}
+			
+			.neirongs3 {
+				color: #A9A9A9;
+				display: flex;
+				justify-content: space-around;
+			}
+			.tops{
+				width: 100%;
+				height: 56px;
+				background: #F2F2F2;
+			}
+			.tops div{
+				font-size: 17px;
+				text-align: center;
+				color: slategray;
+				line-height: 56px;
+			}
+			.tops a{
+				position: absolute;
+				float: left;
+				margin-left: 10px;
+				line-height: 56px;
+				color: slategray;
+			}
+			/* .tops button{
+				position: absolute;
+				margin-top: -37px;
+				margin-left: 5px;
+				font-size: 17px;
+				border: 0;
+				color: slategray;
+				background: 0;
+			} */
+			.tupians img{
+				width: 100%;
+				height: 200px;
+			}
+			.titles{
+				width: 100%;
+				height: 35px;
+				background: #DDDDDD;
+				margin-top: -4px;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				font-weight: bolder;
+			}
+			.tishi{
+				width: 100%;
+				height: 100px;
+				margin: 5px 0px 5px 0px;
+				font-size: 15px;
+				color: #7E7E7E;
+			}
+			.jijie{
+				width: 100%;
+				height: 49px;
+				background: white;
+				margin-bottom: 2px;
+				display: flex;
+				justify-content: space-around;
+				align-items: center;
+				border-bottom: 1px solid silver;
+			}
+			.jijie span{
+				font-size: 11px;
+			}
+			.zhuti{
+				width: 100%;
+				height: 49px;
+				background: white;
+				display: flex;
+				justify-content: space-around;
+				align-items: center;
+			}
+			.zhuti span{
+				font-size: 11px;
+			}
+			.aaa{
+				width: 100%;
+				height: 5px;
+				background: silver;
+			}
+			.danjia{
+				width: 100%;
+				height: 46px;
+				background: white;
+				border-bottom: 1px solid silver;
+				display: flex;
+				flex: 1;
+				justify-content: space-between;
+				font-size: 14px;
+				color: #7E7E7E;
+			}
+			.danjia div{
+				width: 33%;
+				text-align: center;
+				line-height: 46px;
+			}
+			.dingzhi{
+				width: 100%;
+				height: 50px;
+				background: whitesmoke;
+				position: fixed;
+				bottom: 0;
+				display: flex;
+				justify-content: space-between;
+			}
+			.dingzhi1{
+				display: flex;
+			}
+			.dingzhi1 div{
+				width: 65px;
+				height: 50px;
+				text-align: center;
+				line-height: 50px;
+				color: #7E7E7E;
+				border-right: 0.5px solid slategray;
+			}
+			.dingzhi2{
+				width: 91px;
+				height: 50px;
+				font-size: 14px;
+				text-align: center;
+				line-height: 50px;
+				color: white;
+				background: #EC7A27;
+			}
+			.dibu{
+				width: 100%;
+				height: 50px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+				<router-link to="/neirongtitles"><span @click = "fun" v-if="type" class="huanying">欢迎来到候鸟</span></router-link>
+			<router-view v-if="!type"></router-view>
+		</div>
+	</body>
+	<script type="text/template" id="con">
+		<div v-if="item.product_base_info !== undefined">
+			<div class="tops">
+				<router-link to="/neirongtitles">返回</router-link>
+				<div>产品详细</div>
+				<!-- <button type="button">返回</button> -->
+			</div>
+			<div class="tupians">
+				<img :src="item.product_base_info.pro_pic_url" />
+			</div>
+			<div class="titles">
+				<div class="titles1" >{{item.product_base_info.pro_title}}</div>
+			</div>
+			<div class="tishi">
+				<div class="jijie">
+					<div>适宜季节</div>
+					<span v-for="item in item.product_base_info.product_season">{{item.season}}</span>
+				</div>
+				<div class="zhuti">
+					<div>主题</div>
+					<span v-for="item in item.product_base_info.product_type">{{item.type}}</span>
+				</div>
+			</div>
+			<div class="aaa"></div>
+			<div class="xuanze">
+				<div class="danjia">
+					<div>单价</div>
+					<div>{{item.product_base_info.amount}}元起</div>
+					<div>0元起</div>
+				</div>
+				<div class="danjia">
+					<div>人数</div>
+					<div>8成人</div>
+					<div>0儿童</div>
+				</div>
+				<div class="danjia">
+					<div>日期</div>
+					<div></div>
+					<div>按需定制</div>
+				</div>
+				<div class="danjia">
+					<div>出发</div>
+					<div></div>
+					<div>按需定制</div>
+				</div>
+				<div class="danjia">
+					<div>周期</div>
+					<div></div>
+					<div>{{item.product_base_info.routing_dat}}天{{item.product_base_info.routing_nigth}}晚</div>
+				</div>
+				<div class="danjia">
+					<div>国家</div>
+					<div></div>
+					<div>日本</div>
+				</div>
+				<div class="danjia">
+					<div>商家</div>
+					<div></div>
+					<div>{{item.seller_nick_name}}</div>
+				</div>
+			</div>
+			<div class="dingzhi">
+				<div class="dingzhi1">
+					<div style="font-size: 10px;">咨询定制师</div>
+					<div>收藏</div>
+				</div>
+				<div class="dingzhi2">
+					立即定制
+				</div>
+			</div>
+			<div class="dibu">
+				
+			</div>
+		</div>
+	</script>
+	<script type="text/javascript">
+		/***********推荐内容区****************/
+		//更改为路由组件
+		var neirongtitles = {
+			data:function(){
+				return {
+					neirong:[]
+				}
+			},
+			template:`
+				<div>
+					<div class="neirong" v-for='(item,index) in neirong' :key='index'>
+						<router-link :to="'/myneirong/'+item.productId">
+							<img :src="item.proPicUrl" >
+							<div class="neirongs">
+								<div class="neirongs1">{{item.proTitle}}</div>
+								<div class="neirongs2"><span><img src="img/地点.png" ></span>{{item.country}}</div>
+								<div class="neirongs3">
+									<span><span><img src="img/时间.png" ></span>{{item.routingDat}}天{{item.routingNigth}}晚</span>
+									<span><span><img src="img/金钱%20(1).png" ></span>{{item.amount}}元起</span>
+								</div>
+							</div>
+						</router-link>
+					</div>
+				</div>
+			`,
+			//挂载后引入数据
+			mounted:function(){
+				axios.post("http://www.51houniao.com/product/product/getProductRecommendUser",{
+					desc: false,
+					orderBy: "top",
+					pageNow: 1,
+					pageSize: 20,
+					seller_user_id: "4bc4027c645343f09a964b5c2e9f875b"
+				}).then((res)=>{
+					// console.log(res);
+					this.neirong = res.data;
+					console.log(this.neirong)
+				})
+			}
+		}
+		//点击内容区的列表进入详细组件
+		var myneirong = {
+			data:function(){
+				return {
+					item:{}
+				}
+			},
+			template:'#con',
+			watch:{
+				'$route'(to,from){}
+			},
+			mounted:function(){
+				//获取内容页数据
+				axios.get("http://www.51houniao.com/product/product/getProductDetails/"+this.$route.params.idvalue
+					).then((res)=>{
+					console.log(this.$route);
+					this.item = res.data;
+					console.log(this.item)
+				})
+			}
+		}
+		//配置路由表
+		var routes = [
+			{"path":"/neirongtitles","component":neirongtitles},
+			{'path':'/myneirong/:idvalue','component':myneirong}
+		]
+		//创建路由对象
+		var router = new VueRouter({
+			routes:routes
+		})
+		const vm = new Vue({
+			el:'#app',
+			data:{
+				type:true
+			},
+			router:router,
+			methods:{
+				fun:function(){
+ 					this.type = false
+				}
+			}
+		})
+	</script>
+</html>
