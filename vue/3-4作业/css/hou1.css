@@ -1,0 +1,184 @@
+ html, body {
+		      position: relative;
+		      height: 100%;
+		    }
+		    body {
+		      background: #eee;
+		      font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+		      font-size: 14px;
+		      color:#000;
+		      margin: 0;
+		      padding: 0;
+		    }
+		    .swiper-container {
+		      width: 100%;
+		      height: 233px;
+		
+		    }
+		    .swiper-slide {
+		      text-align: center;
+		      font-size: 18px;
+		      background: #fff;
+		
+		      /* Center slide text vertically */
+		      display: -webkit-box;
+		      display: -ms-flexbox;
+		      display: -webkit-flex;
+		      display: flex;
+		      -webkit-box-pack: center;
+		      -ms-flex-pack: center;
+		      -webkit-justify-content: center;
+		      justify-content: center;
+		      -webkit-box-align: center;
+		      -ms-flex-align: center;
+		      -webkit-align-items: center;
+		      align-items: center;
+		    }
+			.swiper-slide img{
+				width: 100%;
+				height: 233px;
+			}
+			.titless{
+				margin-top: -10px;
+				width: 100%;
+				height: 156px;
+				background: white;
+				margin-bottom: 10px;
+			}
+			.titles{
+				padding-top: 20px;
+			}
+			.titles div{
+				width: 100%;
+				height: 20px;
+				position: relative;
+				margin-top:10px;
+				font-size: 24px;
+			}
+			.titles2-0{
+				margin-top: 10px;
+				margin-left: 20px;
+				font-size: 24px;
+				padding-top: 10px;
+			}
+			.titles2-1{
+				display: flex;
+				justify-content: space-between;
+				margin: 10px 20px 20px 20px;
+				
+			}
+			.titles2-2{
+				width: 48px;
+				height: 24px;
+				background: #4CACFF;
+				border-radius: 10px;
+				text-align: center;
+				line-height: 24px;
+				color: white;
+			}
+			.titles3{
+				display: flex;
+				margin: -10px 20px 20px 20px;
+			}
+			.titles4{
+				margin: -10px 20px 20px 20px;
+			}
+			.titles4 span{
+				font-size: 23px;
+				color: red;
+			}
+			.yuyue{
+				width: 100%;
+				height: 400px;
+				background: white;
+			}
+			.yuyues{
+				display: flex;
+				overflow-x: auto;
+			}
+			.yuyues:-webkit-scrollbar {
+				display: none;
+			}
+			.yuyue-1{
+				width: 90%;
+				height: 45px;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				padding: 10px 20px 20px 10px;
+			}
+			.yuyue-1 div{
+				font-size: 19px;
+			}
+			.yuyue-2{
+				width: 175px;
+				height: 266px;
+				background: whitesmoke;
+				border-radius: 12px;
+				margin-left: 10px;
+			}
+			.yuyue-2 img{
+				width: 175px;
+				height: 120px;
+			}
+			.titles2-2-1{
+				padding: 10px;
+				width: 155px;
+				height: 146px;
+			}
+			.titles2-2-1-2{
+				padding-top: 10px;
+				font-size: 14px;
+			}
+			.titles2-2-1-3{
+				font-size: 12px;
+				display: flex;
+				justify-content: space-between;
+				padding-top: 14px;
+			}
+			.titles2-2-1-3-2{
+				width: 44px;
+				height: 24px;
+				background: skyblue;
+				color: white;
+				text-align: center;
+				line-height: 24px;
+				border-radius: 10px;
+				margin-top: -5px;
+			}
+			.dibu{
+				width: 100%;
+				height: 50px;
+				background: whitesmoke;
+				position: fixed;
+				bottom: 0;
+				display: flex;
+				justify-content: space-around;
+				align-items: center;
+			}
+			.dibu div{
+				width: 40%;
+				height: 40px;
+				background: skyblue;
+				text-align: center;
+				line-height: 40px;
+				border-radius: 10px;
+			}
+			.dibu div:nth-of-type(1){
+				background: steelblue;
+			}
+			.dibu div:nth-of-type(2){
+				color: white;
+			}
+			.fanhui{
+				background: darkgray;
+				padding: 5px 10px 5px 10px;
+				margin: 10px;
+				border-radius: 5px;
+				float: left;
+			}
+			.zanwu{
+				width: 100%;
+				font-size: 30px;
+				text-align: center;
+			}
