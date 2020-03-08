@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<router-link to="Shouye">
+		<router-link to="/Shouye">
 			<img id="fanhuis" src="../assets/icons/返回.png" />
 		</router-link>
 		<!-- <div id="fanhui">

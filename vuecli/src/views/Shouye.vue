@@ -9,7 +9,7 @@
 			<div class="fenleiwenzi" v-for="(item,index) in neirong.iconList" :key="index">
 				<!-- <router-link to='/fenleidaohang'> -->
 				<!-- <router-link :to="'/fenleidaohang/'+item.CategoryName+item.CategoryMemo"> -->
-				<router-link :to="{name:'Fenleidaohang',params:{data:item.CategoryMemo+'&tileName='+item.CategoryName}}">
+				<router-link  :to="'/Fenleidaohang/'+item.CategoryMemo.charAt(item.CategoryMemo.length-1)">
 					<div>
 						<img :src="require('../assets/icon/'+item.CategoryOrder+'.png')" />
 					</div>
