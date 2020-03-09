@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/vuex.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="app">
+			获取vuex仓库中的值：{{count}}
+		</div>
+	</body>
+	<script type="text/javascript">
+		//1.创建vuex对象
+		var store = new Vuex.Store({//3.new Vuex.Store创建vuex仓库
+			//4.定义仓库中的状态值
+			state:{
+				count:10
+			}
+		})
+		const vm = new Vue({
+			el:'#app',
+			data:{},
+			computed:{
+				count(){//5.获取vuex中的数据
+						return this.$store.state.count;
+				}
+			},
+			//2.注册vuex
+			store:store
+		})
+	</script>
+</html>

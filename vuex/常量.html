@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/vuex.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="app">
+			{{count}}
+			<button @click="fun">加</button>
+		</div>
+	</body>
+	<script type="text/javascript">
+		const INCREMENT = 'INCREMENT';
+		var mapState = Vuex.mapState;
+		var store = new Vuex.Store({
+			state:{
+				count:10
+			},
+			mutations:{
+				[INCREMENT]:function(state,n){
+					state.count += n.num
+				}
+			}
+		})
+		const vm = new Vue({
+			el:'#app',
+			data:{},
+			computed:{
+				...mapState({
+					count:store=>store.count
+				})
+			},
+			methods:{
+				fun:function(){
+					this.$store.commit({
+						type:INCREMENT,
+						num:5
+					})
+				}
+			},
+			store:store
+		})
+			
+	</script>
+</html>
