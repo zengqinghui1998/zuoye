@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/vuex.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="app">
+			{{count}}
+			<button @click="fun">加1</button>
+			<button @click="fun1">异步加1</button>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var mapState = Vuex.mapState;
+		var mapMutations = Vuex.mapMutations;
+		var mapActions = Vuex.mapActions;
+		var store = new Vuex.Store({
+			state:{
+				count:10
+			},
+			mutations:{
+				jia:function(state){
+					state.count++
+				}
+			},
+			actions:{
+				jia2:function(state2){
+					setTimeout(()=>{
+						state2.commit('jia')
+					},2000)
+				}
+			}
+		})
+		const vm = new Vue({
+			el:'#app',
+			data:{},
+			computed:{
+				...mapState({
+					count:state=>state.count
+				})
+			},
+			methods:{
+				...mapMutations({
+					fun:'jia'
+				}),
+				...mapActions({
+					fun1:'jia2'
+				})
+			},
+			store:store
+		})
+	</script>
+</html>

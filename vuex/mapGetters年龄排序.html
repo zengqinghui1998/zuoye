@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/vuex.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="app">
+			<ul>
+				<li v-for="(item,index) in paixu">{{item}}</li>
+			</ul>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var mapGetters = Vuex.mapGetters;
+		var store = new Vuex.Store({
+			state: {
+				stu: [{
+						'id': 1,
+						'name': '张三',
+						'age': 19
+					},
+					{
+						'id': 2,
+						'name': '李四',
+						'age': 21
+					},
+					{
+						'id': 3,
+						'name': '曾五',
+						'age': 22
+					},
+					{
+						'id': 4,
+						'name': '王八',
+						'age': 13
+					},
+				]
+			},
+			getters: {
+				paixu(state){
+					var ages = [...state.stu];
+					return ages.sort(function(a,b){return b.age - a.age})
+					
+				}
+			}
+		})
+		const vm = new Vue({
+			el:'#app',
+			data:{},
+			computed:{
+				...mapGetters(['paixu'])
+			},
+			store:store
+		})
+	</script>
+</html>
